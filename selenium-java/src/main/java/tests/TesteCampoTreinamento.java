@@ -125,6 +125,34 @@ public class TesteCampoTreinamento {
 		
 		Assert.assertTrue(encontrou);
 		
+		driver.quit();
+		
+	}
+	
+	@Test
+	public void deveVerificarValoresComboMultiplo() {
+		
+		System.setProperty("webdriver.chrome.driver", "C:\\Users\\marce\\drivers\\chromedriver.exe");
+		
+		WebDriver driver= new ChromeDriver();
+		driver.manage().window().maximize();
+		driver.get("file:///"+System.getProperty("user.dir")+"/src/main/resources//componentes.html");
+		
+		WebElement element = driver.findElement(By.id("elementosForm:esportes"));
+		Select combo= new Select(element);
+		
+		combo.selectByVisibleText("Corrida");
+		combo.selectByVisibleText("Natacao");
+		combo.selectByVisibleText("O que eh esporte?");
+		
+		Assert.assertEquals(3, combo.getAllSelectedOptions().size());
+		
+		combo.deselectByVisibleText("O que eh esporte?");
+		
+		Assert.assertEquals(2, combo.getAllSelectedOptions().size());
+		
+		//driver.quit();
+		
 	}
 
 
